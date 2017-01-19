@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="formCtrl">
+    <form novalidate>
+        First Name:<br>
+        <input type="text" ng-model="user.FirstName"><br>
+        Last Name:<br>
+        <input type="text" ng-model="user.LastName">
+        <br><br>
+    </form>
+    <p>form = {{user}}</p>
+    <p ng-repeat="employee in Employees">employee = {{employee}}</p>
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+
+     /* */
+    app.controller('formCtrl', function($scope) {
+        $scope.employee1 = {EmployeeId:"0",FirstName:"John", LastName:"Doe", UserName:"nesto", Password:"nesto",
+        EMBG:"nesto", Address:"nesto", Phone:"nesto", Education:"nesto", Start_employment_date:"2017-01-12",
+        End_employment_date:"2017-01-12", Vacation_days:22, Status_employed:true, Status_employed:true,
+        EmployeeDepartment : Department};
+        $scope.employee2 = {EmployeeId:"1",FirstName:"Kiki", LastName:"Dva", UserName:"nesto", Password:"nesto",
+            EMBG:"nesto", Address:"nesto", Phone:"nesto", Education:"nesto", Start_employment_date:"2017-01-12",
+            End_employment_date:"2017-01-12", Vacation_days:22, Status_employed:true, Status_employed:true,
+            EmployeeDepartment : Department};
+        $scope.Employees = [employee1,employee2];
+        $scope.reset = function() {
+            $scope.user = angular.copy($scope.employee1);
+        };
+        $scope.reset();
+    });
+</script>
+
+</body>
+</html>

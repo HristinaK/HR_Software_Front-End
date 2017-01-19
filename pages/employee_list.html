@@ -22,6 +22,8 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
     <![endif]-->
 
     <!-- Bootstrap Core CSS -->
@@ -72,7 +74,7 @@
 
 </head>
 
-<body>
+<body ng-app="myApp">
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -170,6 +172,127 @@
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
+                                <tbody>
+                                <tr ng-repeat="employee in employees">
+                                    <td>{{employee.FirstName}}</td>
+                                    <td>{{employee.LastName}}</td>
+                                    <td>{{employee.JobTitle}}</td>
+                                    <td>{{employee.Department}}</td>
+                                    <td>{{employee.EMBG}}</td>
+                                    <td>{{employee.Phone}}</td>
+                                    <td>{{employee.Address}}</td>
+                                    <td>{{employee.Vacation_days}}</td>
+                                    <td>{{employee.Education}}</td>
+                                    <td><span ng-repeat="skill in employee.Skills">{{employee.skill}} ,</span></td>
+                                    <td class="center">
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal"><i class="fa fa-2x fa-pencil-square-o"></i></button>
+                                        <!-- Trigger the modal with a button -->
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog" ng-controller="formCtrl">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Edit Employee - {{employee.FirstName}} {{employee.LastName}}</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form role="form">
+                                                            <div class="form-group">
+                                                                <label>First Name</label>
+                                                                <input class="form-control" type="text" title="" required ng-model="{{employee.FirstName}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Last Name</label>
+                                                                <input class="form-control" type="text" title="" required ng-model="{{employee.LastName}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Username</label>
+                                                                <input class="form-control" type="text" title="" required ng-model="{{employee.Username}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input class="form-control" type="text" title="" required ng-model="{{employee.Password}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Job Title</label>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                                                               value="option1" checked="">Employee
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input type="radio" name="optionsRadios" id="optionsRadios2"
+                                                                               value="option2">Manager
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Job Title</label>
+                                                                <select class="form-control" title="">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Department</label>
+                                                                <select class="form-control" title="" ng-model="{{employee.Department}}">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>EMBG</label>
+                                                                <input class="form-control" type="text" title=""  required ng-model="{{employee.EMBG}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Phone Number</label>
+                                                                <input class="form-control" type="text" title="" ng-model="{{employee.Phone}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Address</label>
+                                                                <input class="form-control" type="text" title="" ng-model="{{employee.Address}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Number of vacation days</label>
+                                                                <input class="form-control" type="number" title="" required ng-model="{{employee.Vacation_days}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Education</label>
+                                                                <textarea class="form-control" rows="3" title="edu" ng-model="{{employee.Education}}"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Skills</label>
+                                                                <select multiple class="form-control" title="">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                </select>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-success">Submit</button>
+                                                            <button type="reset" class="btn btn-default">Reset</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+<!--
                                 <tbody>
                                 <tr class="odd gradeX">
                                     <td>Trident</td>
@@ -472,6 +595,7 @@
                                     </td>
                                 </tr>
                                 </tbody>
+-->
                             </table>
                         </div>
                         <!-- /.table-responsive -->
@@ -532,6 +656,19 @@
         $('#dataTables-example1').DataTable({
             responsive: true
         });
+    });
+
+    var app = angular.module('myApp', []);
+    var Employees = {firstName:"John", lastName:"Doe", };
+    app.controller('formCtrl', function($scope) {
+        $scope.master = {firstName:"John", lastName:"Doe"};
+        $scope.reset = function() {
+            $scope.user = angular.copy($scope.master);
+        };
+        $scope.reset();
+    });
+    app.controller('tableCtrl', function($scope) {
+        $scope.master = {firstName:"John", lastName:"Doe"};
     });
 </script>
 
